@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Validacao de Formulario</title>
+<style>
+    .mensagem {
+        margin-top: 10px;
+    }
+    .mensagem.positiva {
+        color: green;
+    }
+    .mensagem.negativa {
+        color: red;
+    }
+</style>
+</head>
+<body>
+    <form id="meuFormulario">
+        <label for="campoA">Campo A:</label>
+        <input type="number" id="campoA" name="campoA" required>
+        <br>
+        <label for="campoB">Campo B:</label>
+        <input type="number" id="campoB" name="campoB" required>
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <div id="mensagemValidacao" class="mensagem"></div>
+
+    <script>
+        document.getElementById('meuFormulario').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio do formulario
+
+            // Obtem os valores dos campos
+            var campoA = parseInt(document.getElementById('campoA').value);
+            var campoB = parseInt(document.getElementById('campoB').value);
+
+            // Validacao
+            if (campoB > campoA) {
+                exibirMensagem('O formulario e valido!', 'positiva');
+            } else {
+                exibirMensagem('O formulario e invalido! O numero B deve ser maior que o numero A.', 'negativa');
+            }
+        });
+
+        function exibirMensagem(mensagem, tipo) {
+            var mensagemElemento = document.getElementById('mensagemValidacao');
+            mensagemElemento.textContent = mensagem;
+            mensagemElemento.className = 'mensagem ' + tipo;
+        }
+    </script>
+</body>
+</html>
